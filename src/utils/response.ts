@@ -7,12 +7,11 @@ const handleResponse = <T>(
     data: T | null = null,
     error: string | null = null,
     statusCode: number = 200
-): Response => {
+): void => {
     const response: ResponseObject<T> = { success };
     if (data) response.data = data;
     if (error) response.error = error;
-
-    return res.status(statusCode).json(response);
+    res.status(statusCode).json(response);
 };
 
 export { handleResponse };

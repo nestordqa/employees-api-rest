@@ -16,7 +16,7 @@ describe('JWT Functions', () => {
     it('It must generate a JWT correctly', async () => {
         // Creates a payload
         const payload: JWTPayload = {
-            userId: '12345',
+            id: '12345',
         };
 
         // Generates a JWT
@@ -30,13 +30,13 @@ describe('JWT Functions', () => {
         expect(verifiedPayload).not.toBeNull();
 
         // Verify if the verified token is valid
-        expect(verifiedPayload?.userId).toEqual(payload.userId);
+        expect(verifiedPayload?.id).toEqual(payload.id);
     });
 
     it('It must verify correctly the JWT', async () => {
         // Creates a payload
         const payload: JWTPayload = {
-            userId: '12345',
+            id: '12345',
         };
     
         // Generates a JWT
@@ -47,7 +47,7 @@ describe('JWT Functions', () => {
         expect(verifiedPayload).not.toBeNull();
     
         // Verify if the verified token is valid
-        expect(verifiedPayload?.userId).toEqual(payload.userId);
+        expect(verifiedPayload?.id).toEqual(payload.id);
     });
 
     it('It must handle errors when verifying fails', async () => {
@@ -65,7 +65,7 @@ describe('JWT Functions', () => {
 
         // Creates a payload
         const payload: JWTPayload = {
-            userId: '12345',
+            id: '12345',
         };
 
         // Generates the token with a temporal secret
