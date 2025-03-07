@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "nodemon",
+    "dev": "nodemon -e ts,json --exec ts-node ./src/server.ts",
     "build": "tsc",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
@@ -18,6 +18,10 @@
       "src"
     ],
     "ext": "ts,json",
+    "ignore": [
+      "src/**/*.spec.ts",
+      "src/**/*.test.ts"
+    ],
     "exec": "ts-node ./src/server.ts"
   },
   "keywords": [],
@@ -53,6 +57,7 @@
     "prettier": "^3.5.3",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.6",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   }
 }
