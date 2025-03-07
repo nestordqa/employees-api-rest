@@ -4,78 +4,76 @@ import { JWTPayload } from '../../src/types/jwt';
 
 describe('JWT Functions', () => {
     beforeEach(() => {
-        // Configura las variables de entorno antes de cada test
+        // Configure environment variable befeor each test
         process.env.JWT_SECRET = 'wecaria-secret';
-        process.env.JWT_EXPIRATION = '1h'; // Configura la expiración
     });
 
     afterEach(() => {
-        // Limpia las variables de entorno después de cada test
+        // Cleans environment variables
         delete process.env.JWT_SECRET;
-        delete process.env.JWT_EXPIRATION;
     });
 
     it('It must generate a JWT correctly', async () => {
-        // Crea un payload
+        // Creates a payload
         const payload: JWTPayload = {
             userId: '12345',
         };
 
-        // Genera el JWT
+        // Generates a JWT
         const token = generateToken(payload);
 
         expect(token).not.toBeNull();
         expect(token).not.toBeUndefined();
 
-        // Verifica que el JWT se pueda verificar correctamente
+        // Try to verify the JWT
         const verifiedPayload = verifyToken(token);
         expect(verifiedPayload).not.toBeNull();
 
-        // Verifica que el payload verificado contenga las propiedades esperadas
+        // Verify if the verified token is valid
         expect(verifiedPayload?.userId).toEqual(payload.userId);
     });
 
     it('It must verify correctly the JWT', async () => {
-        // Crea un payload
+        // Creates a payload
         const payload: JWTPayload = {
             userId: '12345',
         };
     
-        // Genera JWT
+        // Generates a JWT
         const token = generateToken(payload);
     
-        // Verifica JWT
+        // Verify the JWT
         const verifiedPayload = verifyToken(token);
         expect(verifiedPayload).not.toBeNull();
     
-        // Verifica que el payload verificado contenga las propiedades esperadas
+        // Verify if the verified token is valid
         expect(verifiedPayload?.userId).toEqual(payload.userId);
     });
 
     it('It must handle errors when verifying fails', async () => {
-        // Establece un token inválido
-        const invalidToken = 'token-invalido';
+        // Put an invalid token
+        const invalidToken = 'invalid';
 
-        // Verifica el token inválido
+        // Verify the invalid token
         const verifiedPayload = verifyToken(invalidToken);
         expect(verifiedPayload).toBeNull();
     });
 
     it('It must handle the error when the secret is not defined and try to verify JWT', async () => {
-        // Elimina el secreto para simular un error
+        // Deletes the secret
         delete process.env.JWT_SECRET;
 
-        // Crea un payload
+        // Creates a payload
         const payload: JWTPayload = {
             userId: '12345',
         };
 
-        // Genera el token con un secreto temporal
+        // Generates the token with a temporal secret
         process.env.JWT_SECRET = 'mi-secreto-de-prueba';
         const token = generateToken(payload);
-        delete process.env.JWT_SECRET; // Elimina nuevamente el secreto
+        delete process.env.JWT_SECRET; // Deletes agian the secret
 
-        // Verifica el JWT sin el secreto
+        // Verify token without secret
         expect(() => verifyToken(token)).toThrowError('JWT_SECRET is not defined');
     });
 });

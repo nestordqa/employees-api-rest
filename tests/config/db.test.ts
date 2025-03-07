@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
-import connectDB from '../../src/config/db'; // Importa la función desde tu archivo
+import connectDB from '../../src/config/db';
 
 jest.mock('mongoose', () => ({
     connect: jest.fn(),
     connection: {
-        readyState: 1, // Estado de conexión exitosa
+        readyState: 1, // Ok status connection
     },
 }));
 
 describe('connectDB', () => {
     beforeEach(() => {
-        // Reinicia el mock antes de cada test
+        // Reload mock before each test
         jest.resetAllMocks();
     });
 
