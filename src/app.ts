@@ -3,6 +3,21 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import authRoutes from './routes/authRoutes';
+import swaggerJsDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+
+// Opciones de configuración para Swagger
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0', // Versión de OpenAPI
+        info: {
+            title: 'Wecaria API Rest', // Título de tu API
+            version: '1.0.0', // Versión de tu API
+            description: 'Wecaria API Rest Technical test', // Descripción
+        },
+    },
+    apis: ['./src/routes/*.ts'], // Ruta donde se encuentran los archivos con comentarios Swagger
+};
 
 const app: Application = express();
 
@@ -13,5 +28,11 @@ app.use(express.json());
 
 //Routes
 app.use('/api/auth', authRoutes);
+
+
+// Generar la especificación Swagger
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+// Route for docs
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 export default app;
