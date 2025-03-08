@@ -87,4 +87,35 @@ router.post('/login', login);
  */
 router.post('/logout', authMiddleware, logout);
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *         - firstName
+ *         - lastName
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: ID autogenerado del usuario
+ *         email:
+ *           type: string
+ *         password:
+ *           type: string
+ *         firstName:
+ *           type: string
+ *         lastName:
+ *           type: string
+ *       example:
+ *         firstName: "Clark"
+ *         lastName: "Kent"
+ *         job_position: "Desarrollador Fullstack"
+ *         birthdate: "1990-01-01T00:00:00.000Z"
+ */
+
+
 export default router;
