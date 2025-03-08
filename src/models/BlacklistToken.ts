@@ -7,8 +7,16 @@ interface BlacklistToken extends Document {
 }
 
 const blacklistedTokenSchema: Schema = new Schema({
-    token: { type: String, required: true, unique: true },
-    createdAt: { type: Date, default: Date.now, expires: '1h' },
+    token: { 
+        type: String, 
+        required: true, 
+        unique: true 
+    },
+    createdAt: { 
+        type: Date, 
+        default: Date.now, 
+        expires: '1h' 
+    },
 });
   
 export default mongoose.model<BlacklistToken>('BlacklistedToken', blacklistedTokenSchema);
