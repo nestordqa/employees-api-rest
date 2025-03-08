@@ -7,5 +7,26 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  api:
+    build: .
+    container_name: wecaria-api
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGODB_URI=$MONGODB_URI
+      - JWT_SECRET=$JWT_SECRET
+      - JWT_EXPIRATION=$JWT_EXPIRATION
+      - POSITIONS_API_URL=$POSITIONS_API_URL
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
 volumes:
   mongo_data:
