@@ -12,6 +12,7 @@ wecaria-api-rest/
 │   ├── config/            # ⚙️ Configuraciones (DB, JWT, CORS, etc.)
 │   ├── controllers/       # 🧠 Lógica de negocio (CRUD empleados, autenticación)
 │   ├── middlewares/       # 🛡️ Autenticación, manejo de errores
+|   ├── types/             # 🛠️ Interfaces
 │   ├── models/            # 📚 Esquemas de Mongoose
 │   ├── routes/            # 🛣️ Definición de rutas
 │   ├── utils/             # 🛠️ Funciones de utilidad (ej. respuesta estandarizada)
