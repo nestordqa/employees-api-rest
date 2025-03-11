@@ -14,7 +14,6 @@ export const getPositions = async (req: Request, res: Response) => {
         const request = await fetch(url);
         if (request && request.status === 200) {
             //If the request is success, positions array
-            return;
             const response = await request.json();
             handleResponse(res, true, response);
             return;
